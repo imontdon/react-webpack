@@ -33,6 +33,7 @@ const baseConfig = {
   },
   // devtool: 'eval-source-map',
   devServer: {
+    port: 1998,
     historyApiFallback: true,
     hot: true,
     inline: true
