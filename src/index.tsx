@@ -1,6 +1,10 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
+
+import Moible from './views/mobile/app'
+import Web from './views/pc/web'
+
 import { 
   BrowserRouter as Router, 
   Switch, 
@@ -23,13 +27,16 @@ class App extends React.Component<AppProps, object> {
      else { return true }
   }
   render() {
+    const isWeb = this.isWeb()
     return (
       <div>
         <Router>
           {
-            this.isWeb
+            isWeb ?  
+              <Route component={Web} ></Route>
+                : 
+              <Route component={Moible} ></Route>
           }
-          <Route component={NotFound} />
         </Router>
       </div>
     )
