@@ -58,6 +58,20 @@ const baseConfig = {
       {
         test: /\.tsx?$/,
         loader: 'awesome-typescript-loader'
+      },
+      {
+        test: /\.s?css?$/,
+        include: SRC_PATH,
+        loaders: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ],
+        exclude: path.resolve(ROOT_PATH, 'node_modules')
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: ['file-loader']
       }
     ]
   },
