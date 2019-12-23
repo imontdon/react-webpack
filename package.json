@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "cross-env MODE=production webpack-dev-server --hot --open --progress --config ./build/webpack.dev.config.js",
+    "dev": "cross-env MODE=development webpack-dev-server --hot --open --progress --config ./build/webpack.dev.config.js",
     "build": "cross-env MODE=product rimraf dist && webpack --progress --config ./build/webpack.prod.config.js",
     "dll": "cross-env MODE=dll rimraf ./lib && webpack --progress --config ./build/webpack.dll.config.js"
   },

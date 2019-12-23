@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios'
+const { post, get } = require('./service')
 
 // export interface AxiosRequestConfig {
 //   url?: string; // 请求链接
@@ -22,6 +22,6 @@ import axios, { AxiosRequestConfig } from 'axios'
 //   transformResponse?: AxiosTransformer | AxiosTransformer[];
 //   cancelToken?: CancelToken;
 // }
-axios.create = (config: AxiosRequestConfig) => {
+// axios.create = (config: AxiosRequestConfig): void => {
   
-}
+// }
