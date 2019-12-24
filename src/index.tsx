@@ -10,11 +10,14 @@ import { menu } from './reducers/menu'
 import Moible from './views/mobile/app'
 import Web from './views/pc/web'
 
+import './api'
+// import './api/nav'
+
 import { 
   BrowserRouter as Router, 
   Route, 
 } from 'react-router-dom'
-import NotFound from './404'
+// import NotFound from './404'
 interface AppProps {
   type?: string
 }
@@ -43,6 +46,7 @@ class App extends React.Component<AppProps, AppState> {
         const clientWidth: number = document.documentElement.clientWidth
         if (clientWidth > 640) {
           docEl.style.cssText = 'font-size: 100px !important;'
+          document.body.style.cssText = `font-size: 100px !important;`
         } else {
           const target =  Math.floor(100 * (clientWidth / 720));
           docEl.style.cssText = `font-size: ${target}px !important;`

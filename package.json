@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "cross-env MODE=development webpack-dev-server --hot --open --progress --config ./build/webpack.dev.config.js",
     "build": "cross-env MODE=product rimraf dist && webpack --progress --config ./build/webpack.prod.config.js",
-    "dll": "cross-env MODE=dll rimraf ./lib && webpack --progress --config ./build/webpack.dll.config.js"
+    "dll": "cross-env MODE=dll rimraf ./lib && webpack --progress --config ./build/webpack.dll.config.js",
+    "data": "node ./src/api/puppeteer"
   },
   "keywords": [],
   "author": "",
@@ -47,7 +48,8 @@
     "antd": "^3.26.3",
     "axios": "^0.19.0",
     "express": "^4.17.1",
-    "mock": "^0.1.1",
+    "mockjs": "^1.1.0",
+    "puppeteer": "^2.0.0",
     "qs": "^6.9.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",

@@ -9,8 +9,9 @@ const vendors = [
   'react-redux',
   'react-router',
   // 'react-router-redux',
-  'redux',
-  'redux-actions'
+  'redux'
+  // 'redux-actions',
+  // 'mockjs'
 ]
 
 module.exports = {

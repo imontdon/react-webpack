@@ -14,8 +14,13 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   (response: AxiosResponse): AxiosResponse<any> | Promise<AxiosResponse<any>> => {
-    const debug = process.env.MODE === 'development'
-    console.log(debug)
+    const debug = process.env.NODE_ENV === 'development'
+    if (debug) {
+      if (response.status === 200) {
+        console.log(`url: ${response.config.url}, method: ${response.config.method} \r\ndata: ${response.data}`)
+      }
+    }
+    // console.log(debug, process.env, response)
     return response
   },
   (error: any) => {
@@ -44,23 +49,21 @@ const getConfigHeader = (type: string, config: AxiosRequestConfig = {}): AxiosRe
   return config
 }
 
-const post = (url: string, data: any, type?: string, config: AxiosRequestConfig = {}): Promise<AxiosResponse<any>> => {
+const post = (url: string, data?: any, type?: string, config: AxiosRequestConfig = {}): Promise<AxiosResponse<any>> => {
   config = getConfigHeader(type, config)
   return service.post(url, data, config)
 }
 
-const get = (url: string, data: any, type?: string, config: AxiosRequestConfig = {}): Promise<AxiosResponse<any>> => {
+const get = (url: string, data?: any, type?: string, config: AxiosRequestConfig = {}): Promise<AxiosResponse<any>> => {
   config = getConfigHeader(type, config)
   /**
    * { a: b, c: d } => url?a=b&c=d
    */
-  Object.keys(data).forEach((key, index) => {
-    if (index === 0) {
-      url += `?${key}=${data[key]}`
-    } else {
-      url += `&${key}=${data[key]}`
-    }
-  })
+  if (data) {
+    Object.keys(data).forEach((key, index) => {
+      url += (index === 0 ? `?{key}=${data[key]}` : `&{key}=${data[key]}`)
+    })
+  }
   return service.get(url, config)
 }
 

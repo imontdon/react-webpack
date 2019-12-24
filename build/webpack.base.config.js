@@ -11,7 +11,6 @@ const BUILD_PATH = path.resolve(ROOT_PATH, './dist')
 // console.log(path.join(ROOT_PATH, '/build/lib'))
 // const hasFile = fs.statSync(path.join(ROOT_PATH, '/build/lib'))
 // console.log(hasFile)
-
 /**
  * 防止dll生成失败
  */

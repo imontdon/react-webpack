@@ -1,16 +1,28 @@
 
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+// import * as ReactDOM from 'react-dom';
 // import PropTypes from 'prop-types'
 
 import { Icon } from 'antd'
 
+// redux
 import { connect, Dispatch } from 'react-redux';
 import * as actions from '../../actions/menu';
 import { StoreState } from '../../types'
 import { store } from '../../index'
 
+// components
 import SideBar from './sider/index'
+import Card from './card/index'
+
+import {
+  mockFetchNav
+} from '../../request/index'
+
+import {
+  NavList,
+  NavItem
+} from '../../interface/nav'
 const img =  require('../../assets/images/header.png')
 interface AppProps {
   showMenu?: () => void,
@@ -18,11 +30,13 @@ interface AppProps {
   getMenuStatus?: () => void
 }
 interface MobileState {
-  status?: boolean
+  status?: boolean,
+  navList: NavList[]
 }
 interface HeaderProps {
 
 }
+
 class Mobile extends React.Component<AppProps, MobileState> {
   constructor(props) {
     super(props)
@@ -30,7 +44,13 @@ class Mobile extends React.Component<AppProps, MobileState> {
     //   status: false
     // }
   }
-  componentDidMount() {
+  async componentDidMount() {
+    const res = await mockFetchNav()
+    // console.log(JSON.parse(res.data)[0])
+    this.setState({ navList: JSON.parse(res.data) })
+    setTimeout(() => {
+      console.log(this.state.navList)
+    }, 10000)
     // this.setState({ status: store.getState().menuStatus })
     window.addEventListener('click', this.hiddenMenu.bind(this))
   }
@@ -55,6 +75,21 @@ class Mobile extends React.Component<AppProps, MobileState> {
         <Icon type="menu" onClick={showMenu} className={'icon-menu'}/>
       </div>
     }
+    const CardList = (): JSX.Element | null => {
+      return (
+        <div className={'card-list'}>
+          {
+            this.state ? 
+            this.state.navList.length > 0 ? 
+              this.state.navList.map((nav: NavList) => {
+                return <Card listItem={nav}></Card>
+              }) : null
+            : null
+          }
+        </div>
+      )
+      
+    }
     return (
       <div className={'mobile-app'}>
         <SideBar />
@@ -63,6 +98,7 @@ class Mobile extends React.Component<AppProps, MobileState> {
           <div className={'app-body'}>
             <img src={img} alt="" className={'logo-img'}/>
             <span>Imontdon</span>
+            <CardList />
           </div>
         </div>
       </div>
