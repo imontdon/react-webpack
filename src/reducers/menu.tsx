@@ -6,16 +6,16 @@ import { SHOW_MENU, HIDDEN_MENU, GET_MENU_STATUS } from '../constants'
 
 export function menu(state: StoreState, action: MenuAction): StoreState {
   if (!action.type.includes('INIT')) {
-    const silder = document.querySelector('.silder-bar') as HTMLElement
+    const slider = document.querySelector('.slider-bar') as HTMLElement
     switch(action.type) {
       case SHOW_MENU:
         if (!state.menuStatus) {
-          silder.classList.add('show')
+          slider.classList.add('show')
         }
         return { ...state, menuStatus: true}
       case HIDDEN_MENU:
         if (state.menuStatus) {
-          silder.classList.remove('show')
+          slider.classList.remove('show')
         }
         return { ...state, menuStatus: false }
       case GET_MENU_STATUS:

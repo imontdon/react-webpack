@@ -1,3 +1,3 @@
-import { NavItem, NavList } from './nav'
+import { NavItem, NavSite } from './nav'
 
-export type Nav = NavList | NavItem
+export type Nav = NavSite | NavItem

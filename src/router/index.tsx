@@ -8,14 +8,6 @@ interface RouteConfig {
 }
 const Routes: RouteConfig[] = [
   {
-    name: 'about',
-    path: '/about',
-    component: Loadable({
-      loader: () => import('../components/test'),
-      loading: () => <div />
-    }),
-  },
-  {
     name: 'match',
     path: '/match',
     component: '',

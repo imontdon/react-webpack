@@ -1,9 +1,9 @@
-export interface NavList {
+export interface NavItem {
   icon: string, 
   classify: string, 
-  sites: NavItem[]
+  sites: NavSite[]
 }
-export interface NavItem {
+export interface NavSite {
   href: string, 
   logo: string, 
   name: string, 

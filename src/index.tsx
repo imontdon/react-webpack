@@ -1,17 +1,32 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+
+import { BackTop } from 'antd'
+
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
+
+import Loadable from 'react-loadable';
 
 import { StoreState } from './types'
 import { menu } from './reducers/menu'
 // import reducers from './reducers'
 
-import Moible from './views/mobile/app'
+// components
+import Loading from './views/loading'
+// import Moible from './views/mobile/app'
 import Web from './views/pc/web'
 
 import './api'
+import './assets/index.scss'
 // import './api/nav'
+
+
+const Moible = Loadable({
+  loader: () => import('./views/mobile/app'),
+  loading: Loading,
+  timeout: 300
+})
 
 import { 
   BrowserRouter as Router, 
@@ -19,7 +34,7 @@ import {
 } from 'react-router-dom'
 // import NotFound from './404'
 interface AppProps {
-  type?: string
+  status?: boolean
 }
 interface AppState {
 
@@ -58,19 +73,40 @@ class App extends React.Component<AppProps, AppState> {
     } else { // PC端，先不做
       
     }
+    window.addEventListener('resize', this.changeMode.bind(this), false)
   }
-  
+  changeMode() {
+    this.setState({ status: 1 }) // 触发render事件，无实际意义
+  }
+  componentWillMount() {
+    window.removeEventListener('resize', this.changeMode)
+  }
   render() : JSX.Element {
     const isWeb = this.isWeb()
+    const Footer = (): JSX.Element => {
+      return (
+        <div className={'common-footer'}>
+          Copyright &copy; 2019 <a style={{ marginLeft: '.2rem' }} href={'https://github.com/imontdon'} target='_blank'>imontdon</a>
+        </div>
+      )
+    }
     return (
-      <Router>
-        {
-          isWeb ?  
-            <Route component={Web}></Route>
-              : 
-            <Route component={Moible}></Route>
-        }
-      </Router>
+      <div>
+        <Router>
+          {
+            isWeb ?  
+              <Route component={Web}></Route>
+                : 
+              <Route component={Moible}></Route>
+          }
+        </Router>
+        <Footer />
+        <BackTop>
+          <div className="backtop">
+            UP
+          </div>
+        </BackTop>
+      </div>
     )
   }
 }

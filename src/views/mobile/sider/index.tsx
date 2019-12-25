@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { Input, AutoComplete, Icon } from 'antd'
 
-import  "../../../assets/index.scss"
 
 interface AppProps {  }
 interface AppState {
@@ -48,7 +47,7 @@ class SideBar extends React.Component<AppProps, AppState> {
   }
   render() {
     return (
-      <div className={'silder-bar'}>
+      <div className={'slider-bar'}>
         <AutoComplete
           className="certain-category-search"
           dropdownClassName="certain-category-search-dropdown"
