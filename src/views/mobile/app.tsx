@@ -81,6 +81,7 @@ class Mobile extends React.Component<MobileProps, MobileState> {
   }
   handleHiddenMenu(e: MouseEvent | TouchEvent | Event) {
     const target = e.target as EventTarget & HTMLInputElement
+    console.log([target])
     if((target.className && typeof target.className === 'string') && !target.className.includes('ant') && store.getState().menuStatus) {
       const { hiddenMenu } = this.props
       hiddenMenu()
