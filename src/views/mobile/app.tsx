@@ -16,6 +16,7 @@ import App, { store } from '../../index'
 // import SideBar from './sider/index'
 // import Card from './card/index'
 import Loading from '../loading'
+
 const SideBar = Loadable({
   loader: () => import('./sider/index'),
   loading: Loading,
@@ -81,7 +82,7 @@ class Mobile extends React.Component<MobileProps, MobileState> {
   }
   handleHiddenMenu(e: MouseEvent | TouchEvent | Event) {
     const target = e.target as EventTarget & HTMLInputElement
-    console.log([target])
+    // console.log([target])
     if((target.className && typeof target.className === 'string') && !target.className.includes('ant') && store.getState().menuStatus) {
       const { hiddenMenu } = this.props
       hiddenMenu()

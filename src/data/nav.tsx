@@ -50,7 +50,7 @@ const navList = [
   { icon: "sitemap", classify: "综合导航", sites: [
     { href: "https://search.chongbuluo.com/", logo: "https://scholar.chongbuluo.com/favicon.ico", name: "虫部落 快搜", desc: "搜索引擎集合" }, 
     { href: "https://www.youyisi8.com/", logo: "https://www.youyisi8.com/favicon.ico", name: "有意思吧", desc: "分享有意思的文字，网络新鲜好玩内容" }, 
-    { href: "https://docs.rsshub.app/", logo: "https://docs.rsshub.app/logo.png", name: "RSSHub", desc: "可以给任何奇奇怪怪的内容生成 RSS 订阅源" }, 
+    { href: "https://docs.rsshub.app/", logo: "加载失败", name: "RSSHub", desc: "可以给任何奇奇怪怪的内容生成 RSS 订阅源" }, 
     { href: "http://jibulao.com/", logo: "http://jibulao.com/favicon.ico", name: "记不牢", desc: "网站导航" }] }]
 // const navList = JSON.parse(input)
 

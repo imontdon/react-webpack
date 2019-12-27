@@ -1,12 +1,20 @@
 import * as React from 'react'
 import { Input, AutoComplete, Icon } from 'antd'
 
-import menuList from '../../../data/menu'
+// import menuList from '../../../data/menu'
+// mock
+import {
+  mockFetchMenu
+} from '../../../request/index'
 
 import { MenuItem, SubMenuItem } from '../../../interface/menu'
 
 interface AppProps {  }
 interface AppState {
+  menuList?: MenuItem[],
+  loading?: boolean,
+  dataSource?: any[],
+  value: string | number
   // loading: boolean,
   // dataSource: object[],
   // value: string
@@ -23,6 +31,7 @@ class SideBar extends React.Component<AppProps, AppState> {
     loading: false,
     dataSource: [],
     value: '',
+    menuList: []
   }
   handleFocus() {}
   searchData(): void { // 搜索
@@ -49,11 +58,27 @@ class SideBar extends React.Component<AppProps, AppState> {
       }, ms)
     }
   }
-  menuClick(index: number, e: Event) {
+  menuClick(index: number, e: Event | MouseEvent) {
     e.stopPropagation()
-    console.log(e, index)
+    const target = e.currentTarget as HTMLElement
+    let subMenu = target.parentNode.querySelector('.sub-menu') as HTMLElement
+    const icon = target.querySelector('.right-icon') as HTMLElement
+    if (subMenu.classList.contains('show')) {
+      subMenu.classList.remove('show')
+      target.classList.remove('active')
+      icon.style.cssText = ''
+      subMenu.style.cssText = 'transform: rotate(0deg);'
+    } else {
+      subMenu.classList.add('show')
+      target.classList.add('active')
+      icon.style.cssText = 'transform: rotate(180deg)'
+      subMenu.style.cssText = `height: ${this.state.menuList[index].subTypes.length * 0.6}rem;`
+    }
   }
-  componentDidMount() {
+  async componentDidMount() {
+    const res = await mockFetchMenu()
+    const menuList = JSON.parse(res.data)
+    this.setState({ menuList })
   }
   render() {
     const Menu = (props: MenuProps): JSX.Element => {
@@ -74,8 +99,10 @@ class SideBar extends React.Component<AppProps, AppState> {
                       menu.subTypes.map((sub: SubMenuItem) => {
                         return (
                           <li className={'sub-menu__item'}>
-                            <Icon type={sub.icon} className={'sub-menu__item-icon'}></Icon>
-                            <span className={'sub-menu__item-desc'}>{ sub.classify }</span>
+                            <a  href={`#${sub.classify}`}>
+                              <Icon type={sub.icon} className={'sub-menu__item-icon'}></Icon>
+                              <span className={'sub-menu__item-desc'}>{ sub.classify }</span>
+                            </a>
                           </li>
                         )
                       })
@@ -106,7 +133,7 @@ class SideBar extends React.Component<AppProps, AppState> {
         >
           {/* <Input suffix={<Icon type="search" className="certain-category-icon" onClick={e => this.handleSearch(e)} />} /> */}
         </AutoComplete>
-        <Menu list={menuList}/>
+        <Menu list={this.state.menuList}/>
       </div>
     )
   }

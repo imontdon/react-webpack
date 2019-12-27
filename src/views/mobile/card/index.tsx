@@ -51,6 +51,7 @@ class Card extends React.Component<AppProps, MobileState> {
     const { listItem } = this.props
     return (
       <div className={'card'}>
+        <i id={listItem.classify}></i>
         <div className={'top-line'}>
           <Icon type={listItem.icon} className={'card-icon'} />
           <strong>{ listItem.classify }</strong>

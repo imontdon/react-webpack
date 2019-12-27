@@ -54,32 +54,42 @@ class App extends React.Component<AppProps, AppState> {
       else { return true }
   }
   componentDidMount() {
-    if (!this.isWeb()) { // 手机端
-      var docEl: HTMLElement = document.documentElement
-      var resizeEvt: string = 'orientationchange' in window ? 'orientationchange' : 'resize'
-      const recalc = function(): void {
-        const clientWidth: number = document.documentElement.clientWidth
-        if (clientWidth > 640) {
-          docEl.style.cssText = 'font-size: 100px !important;'
-          document.body.style.cssText = `font-size: 100px !important;`
-        } else {
-          const target =  Math.floor(100 * (clientWidth / 720));
-          docEl.style.cssText = `font-size: ${target}px !important;`
-          document.body.style.cssText = `font-size: ${target}px !important;`
-        }
-      }
-      window.addEventListener(resizeEvt, recalc, false)
-      document.addEventListener('DOMContentLoaded', recalc, false);
-    } else { // PC端，先不做
-      
-    }
-    window.addEventListener('resize', this.changeMode.bind(this), false)
+    this.recalc()
+    this.dealPageUnit()
+    // window.addEventListener('resize', this.changeMode.bind(this), false)
   }
-  changeMode() {
-    this.setState({ status: 1 }) // 触发render事件，无实际意义
+  dealPageUnit() {
+    const resizeEvt: string = 'orientationchange' in window ? 'orientationchange' : 'resize'
+    window.addEventListener(resizeEvt, this.recalc.bind(this), false)
+    // if (!this.isWeb()) { // 手机端
+    //   // document.addEventListener('DOMContentLoaded', this.recalc, false);
+    // } else { // PC端，先不做
+    //   // window.removeEventListener(resizeEvt, this.recalc)
+    //   // document.removeEventListener('DOMContentLoaded', this.recalc)
+    //   document.body.removeAttribute('style')
+    //   document.documentElement.removeAttribute('style')
+    // }
+  }
+  recalc () {
+    const docEl: HTMLElement = document.documentElement
+    const clientWidth: number = document.documentElement.clientWidth
+    if (this.isWeb()) { // 先不做
+      document.body.removeAttribute('style')
+      document.documentElement.removeAttribute('style')
+    } else {
+      if (clientWidth > 640) {
+        docEl.style.cssText = 'font-size: 100px !important;'
+        document.body.style.cssText = `font-size: 100px !important;`
+      } else {
+        const target =  Math.floor(100 * (clientWidth / 720));
+        docEl.style.cssText = `font-size: ${target}px !important;`
+        document.body.style.cssText = `font-size: ${target}px !important;`
+      }
+    }
+    this.setState({ status: 1 }) // 响应render函数，无实际意义
   }
   componentWillMount() {
-    window.removeEventListener('resize', this.changeMode)
+    window.removeEventListener('resize', this.recalc)
   }
   render() : JSX.Element {
     const isWeb = this.isWeb()

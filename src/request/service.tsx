@@ -18,7 +18,7 @@ service.interceptors.response.use(
     if (response.status === 200) {
       if (debug) {
         console.log(`url: ${response.config.url}, method: ${response.config.method}`)
-        console.log('data: ', response.config.url === 'http://localhost:1998/api/mock/nav' ? JSON.parse(response.data) : response.data)
+        console.log('data: ', response.config.url.includes('mock') ? JSON.parse(response.data) : response.data)
       }
     }
     // console.log(debug, process.env, response)
