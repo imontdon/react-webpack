@@ -1,5 +1,7 @@
 const path = require('path')
 
+const { resolve } = require('../src/utils/index.ts')
+
 const webpack = require('webpack')
 
 const ROOT_PATH = path.resolve(__dirname, '../')
@@ -24,6 +26,7 @@ const plugins = process.env.MODE === 'development' ? [
 const baseConfig = {
   mode: 'development', // production, development
   entry: {
+    // index: path.resolve(SRC_PATH, 'index.tsx')
     index: path.resolve(SRC_PATH, 'index.tsx')
   },
   output: {
@@ -38,6 +41,9 @@ const baseConfig = {
     inline: true
   },
   resolve: {
+    alias: {
+      '@': resolve('src')
+    },
     extensions: ['.js', '.jsx', '.tsx', '.ts']
   },
   module: {
