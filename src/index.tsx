@@ -15,7 +15,8 @@ import { menu } from './reducers/menu'
 // components
 import Loading from './views/loading'
 // import Moible from './views/mobile/app'
-import Web from './views/pc/web'
+// import Web from './views/pc/web'
+const Web = React.lazy(() => import('./views/pc/web'))
 
 import './api'
 import './assets/index.scss'
@@ -101,14 +102,16 @@ class App extends React.Component<AppProps, AppState> {
       )
     }
     return (
-      <div>
+      <>
         <Router>
-          {
-            isWeb ?  
-              <Route component={Web}></Route>
-                : 
-              <Route component={Moible}></Route>
-          }
+          <React.Suspense fallback={Loading}>
+            {
+              isWeb ?  
+                <Route component={Web}></Route>
+                  : 
+                <Route component={Moible}></Route>
+            }
+          </React.Suspense>
         </Router>
         <Footer />
         <BackTop>
@@ -116,7 +119,7 @@ class App extends React.Component<AppProps, AppState> {
             UP
           </div>
         </BackTop>
-      </div>
+      </>
     )
   }
 }
