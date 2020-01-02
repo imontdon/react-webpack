@@ -1,6 +1,6 @@
-step1.npm run dll => build vendor folder
+step1:  ```npm run dll``` => build vendor folder
 
-step2.npm run dev/build => run develop/prod env
+step2:  ```npm run dev/build``` => run develop/prod env
 
 
 
