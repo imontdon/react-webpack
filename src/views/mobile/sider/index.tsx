@@ -75,6 +75,11 @@ class SideBar extends React.Component<AppProps, AppState> {
       subMenu.style.cssText = `height: ${this.state.menuList[index].subTypes.length * 0.6}rem;`
     }
   }
+  shouldComponentUpdate(nextProps: Readonly<AppProps>, nextState: Readonly<AppState>): boolean {
+    console.log(nextProps, nextState)
+    return nextState.menuList !== this.state.menuList
+    // return true
+  }
   async componentDidMount() {
     const res = await mockFetchMenu()
     const menuList = JSON.parse(res.data)
@@ -86,9 +91,9 @@ class SideBar extends React.Component<AppProps, AppState> {
       return (
         <div className={'menu'}>
           {
-            list.map((menu: MenuItem, index) => {
+            list.map((menu: MenuItem, index: number) => {
               return (
-                <div className={'menu-item'}>
+                <div className={'menu-item'} key={index}>
                   <div className={'menu-header'} onClick={this.menuClick.bind(this, index)}>
                     <Icon type={menu.icon}></Icon>
                     <span className={'menu-title'}>{ menu.type }</span>
@@ -96,9 +101,9 @@ class SideBar extends React.Component<AppProps, AppState> {
                   </div>
                   <ul className={'sub-menu'}>
                     {
-                      menu.subTypes.map((sub: SubMenuItem) => {
+                      menu.subTypes.map((sub: SubMenuItem, key: number) => {
                         return (
-                          <li className={'sub-menu__item'}>
+                          <li className={'sub-menu__item'} key={key}>
                             <a  href={`#${sub.classify}`}>
                               <Icon type={sub.icon} className={'sub-menu__item-icon'}></Icon>
                               <span className={'sub-menu__item-desc'}>{ sub.classify }</span>

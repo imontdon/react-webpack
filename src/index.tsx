@@ -16,13 +16,17 @@ import { menu } from './reducers/menu'
 import Loading from './views/loading'
 // import Moible from './views/mobile/app'
 // import Web from './views/pc/web'
-const Web = React.lazy(() => import('./views/pc/web'))
+// const Web = React.lazy(() => import('./views/pc/web'))
 
 import './api'
 import './assets/index.scss'
 // import './api/nav'
 
-
+const Web = Loadable({
+  loader: () => import('./views/pc/web'),
+  loading: Loading,
+  timeout: 300
+})
 const Moible = Loadable({
   loader: () => import('./views/mobile/app'),
   loading: Loading,

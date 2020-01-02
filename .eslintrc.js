@@ -27,7 +27,8 @@ module.exports = {
   "plugins": [
     "react",
     "jsx-a11y",
-    "import"
+    "import",
+    "react-hooks"
   ],
   // 定制自己的规则
   "rules": {
@@ -37,6 +38,8 @@ module.exports = {
     "semi": 0,
     "quotes": [2, "single"],
     "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
-    "global-require": 0
+    "global-require": 0,
+    "react-hooks/rules-of-hooks": "error", // 检查 Hook 的规则
+    "react-hooks/exhaustive-deps": "warn" // 检查 effect 的依赖
   }
 };

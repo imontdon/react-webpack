@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import { Icon } from 'antd'
 
 interface AppProps {
@@ -26,9 +25,9 @@ class Card extends React.Component<AppProps, MobileState> {
       return (
         <div className={'list'}>
           {
-            sites.map((site: NavSite): JSX.Element => {
+            sites.map((site: NavSite, key: number): JSX.Element => {
               return (
-                <div className={'item'} onClick={() => this.openNewWindow(site.href) }>
+                <div className={'item'} onClick={() => this.openNewWindow(site.href)} key={key} >
                   <div className={'logo'}>
                     <span className={'logo-image'}>
                       {
