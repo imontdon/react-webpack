@@ -40,6 +40,7 @@ module.exports = {
     "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
     "global-require": 0,
     "react-hooks/rules-of-hooks": "error", // 检查 Hook 的规则
-    "react-hooks/exhaustive-deps": "warn" // 检查 effect 的依赖
+    "react-hooks/exhaustive-deps": "warn", // 检查 effect 的依赖
+    "no-implicit-dependencies": ["optional", ["src"]]
   }
 };

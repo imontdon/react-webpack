@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Icon } from 'antd'
 
+import { ThemeContext, theme } from '../../../utils/theme'
+
 interface AppProps {
   listItem: NavItem
 }
@@ -8,13 +10,16 @@ interface MobileState {
 
 }
 interface ListProps {
-  sites: NavSite[]
+  sites: NavSite[],
+  theme: theme
 }
+
 import {
   NavSite,
   NavItem
 } from '../../../interface/nav'
 class Card extends React.Component<AppProps, MobileState> {
+  contextType = ThemeContext
   public openNewWindow(href: string) {
     window.open(href)
   }
@@ -35,7 +40,7 @@ class Card extends React.Component<AppProps, MobileState> {
                           <span className={'logo-image__wrong'}>{ site.logo }</span> : <img src={site.logo} alt=""/>
                       }
                     </span>
-                    <span className={'logo-desc'}>{ site.name }</span>
+                    <span className={'logo-desc'} style={{ color: props.theme.color }}>{ site.name }</span>
                   </div>
                   <div className={'item-desc'}>
                     { site.desc }
@@ -49,14 +54,18 @@ class Card extends React.Component<AppProps, MobileState> {
     }
     const { listItem } = this.props
     return (
-      <div className={'card'}>
-        <i id={listItem.classify}></i>
-        <div className={'top-line'}>
-          <Icon type={listItem.icon} className={'card-icon'} />
-          <strong>{ listItem.classify }</strong>
-        </div>
-        <List sites={listItem.sites}></List>
-      </div>
+      <ThemeContext.Consumer>
+        {({ theme }) => (
+          <div className={'card'}>
+            <i id={listItem.classify}></i>
+            <div className={'top-line'}>
+              <Icon type={listItem.icon} className={'card-icon'} style={{ color: theme.color }}/>
+              <strong style={{color: theme.color}}>{ listItem.classify }</strong>
+            </div>
+            <List sites={listItem.sites} theme={theme} ></List>
+          </div>
+        )}
+      </ThemeContext.Consumer>
     )
   }
 }

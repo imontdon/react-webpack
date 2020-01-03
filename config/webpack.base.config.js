@@ -20,7 +20,7 @@ const plugins = process.env.MODE === 'development' ? [
     context: ROOT_PATH
   })
 ] : null
-
+console.log('src: ', SRC_PATH)
 const baseConfig = {
   mode: 'development', // production, development
   entry: {
@@ -38,6 +38,9 @@ const baseConfig = {
     inline: true
   },
   resolve: {
+    alias: {
+      '@': SRC_PATH
+    },
     extensions: ['.js', '.jsx', '.tsx', '.ts']
   },
   module: {

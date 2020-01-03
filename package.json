@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "cross-env MODE=development webpack-dev-server --hot --open --progress --config ./config/webpack.dev.config.js",
     "build": "cross-env MODE=product rimraf dist && webpack --progress --config ./config/webpack.prod.config.js",
-    "dll": "cross-env MODE=dll rimraf lib && webpack --progress --config ./config/webpack.dll.config.js",
+    "dll": "cross-env MODE=dll rimraf lib && webpack --progress --config ./config/webpack.dll.config.js"
   },
   "keywords": [],
   "author": "",

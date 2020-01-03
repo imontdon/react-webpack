@@ -98,13 +98,13 @@ class App extends React.Component<AppProps, AppState> {
   }
   render() : JSX.Element {
     const isWeb = this.isWeb()
-    const Footer = (): JSX.Element => {
-      return (
-        <div className={'common-footer'}>
-          Copyright &copy; 2019 <a style={{ marginLeft: '.2rem' }} href={'https://github.com/imontdon'} target='_blank'>imontdon</a>
-        </div>
-      )
-    }
+    // const Footer = (): JSX.Element => {
+    //   return (
+    //     <div className={'common-footer'}>
+    //       Copyright &copy; 2019 <a style={{ marginLeft: '.2rem' }} href={'https://github.com/imontdon'} target='_blank'>imontdon</a>
+    //     </div>
+    //   )
+    // }
     return (
       <>
         <Router>
@@ -117,7 +117,7 @@ class App extends React.Component<AppProps, AppState> {
             }
           </React.Suspense>
         </Router>
-        <Footer />
+        {/* <Footer /> */}
         <BackTop>
           <div className="backtop">
             UP

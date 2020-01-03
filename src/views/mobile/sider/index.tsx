@@ -76,7 +76,7 @@ class SideBar extends React.Component<AppProps, AppState> {
     }
   }
   shouldComponentUpdate(nextProps: Readonly<AppProps>, nextState: Readonly<AppState>): boolean {
-    console.log(nextProps, nextState)
+    // console.log(nextProps, nextState)
     return nextState.menuList !== this.state.menuList
     // return true
   }
