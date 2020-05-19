@@ -59,7 +59,7 @@ const baseConfig = {
       },
       {
         test: /\.tsx?$/,
-        loader: 'awesome-typescript-loader'
+        loader: 'awesome-typescript-loader',
       },
       {
         test: /\.s?css?$/,

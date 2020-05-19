@@ -108,14 +108,14 @@ class App extends React.Component<AppProps, AppState> {
     return (
       <>
         <Router>
-          <React.Suspense fallback={Loading}>
+          {/* <React.Suspense fallback={Loading}> */}
             {
               isWeb ?  
                 <Route component={Web}></Route>
                   : 
                 <Route component={Moible}></Route>
             }
-          </React.Suspense>
+          {/* </React.Suspense> */}
         </Router>
         {/* <Footer /> */}
         <BackTop>
